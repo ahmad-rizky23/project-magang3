@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil A Rizky Ramadhan</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background -->
+  <div class="background"></div>
+
+  <!-- Tombol musik di pojok kanan atas -->
+  <div class="music-topright">
+    <button class="spotify-btn">
+      <span id="musicIcon">▶</span>
+    </button>
+    <audio id="player">
+      <source src="sailor.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <!-- Profile -->
+  <main class="profile-container">
+    <img src="anjay.jpeg" class="profile-img" alt="Profil">
+
+    <h1>A Rizky Ramadhan</h1>
+    <p>Pelajar & Fotografi</p>
+
+    <!-- KARTU COLLAPSIBLE -->
+    <div class="cards-container">
+
+      <!-- Project 7 KAIH -->
+      <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+          <h3>Project 7 KAIH</h3>
+          <span class="card-toggle">+</span>
+        </div>
+        <div class="card-body">
+          <p>Saya mengadakan sebuah project yaitu 7 KAIH yg nantinya berisi Foto, Video, dan Penjelasan tentang 7 Kebiasaan Anak Indonesia Hebat.</p>
+   <button
+  class="btn-7kaih"
+  onclick="window.location.href='jurnal.html'">
+  <span class="icon">📘</span>
+  <span class="text">Buka Jurnal 7 KAIH</span>
+  <span class="arrow"></span>
+</button>
+
+      </div>
+        
+      <!-- Pendidikan -->
+      <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+          <h3>KaryaKu</h3>
+          <span class="card-toggle">+</span>
+        </div>
+        <div class="card-body">
+          <p>Saya membuat sebuah game sederhana,tentang menghitung agar mengasah kemampuan dalam menghitung</p>
+    <button id="goldGameBtn" onclick="window.location.href='game.html'">
+  Main Game Menghitung
+</button>
+
+        </div>
+     </div>
+
+    </div>
+
+    <!-- Biodata -->
+    <section class="bio">
+      <h2>About Me</h2>
+      <p>Saya adalah seorang pelajar yang menyukai fotografi. Saya senang belajar hal baru dan menciptakan karya kreatif.</p>
+
+      <h2>Hobby</h2>
+      <p>Fotografi, dan menjelajahi suatu tempat.</p>
+    </section>
+
+    <!-- Sosial Media -->
+    <div class="social">
+      <button onclick="openApp('instagram')"><img src="ig.jpeg" alt="Instagram"></button>
+      <button onclick="openApp('tiktok')"><img src="TikTok.jpeg" alt="TikTok"></button>
+      <button onclick="openApp('discord')"><img src="dc.png" alt="Discord"></button>
+      <button onclick="openApp('gmail')"><img src="gmail.jpeg" alt="Gmail"></button>
+      <button onclick="openApp('whatsapp')"><img src="wa.png" alt="WhatsApp"></button>
+  <button onclick="openApp('github')"><img src="github.jpeg" alt="github"></button>
+    </div>
+
+  </main>
+
+  <footer>
+    © <span id="tahun"></span> A Rizky Ramadhan
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Tombol 7 KAIH buka web jurnal
+    document.getElementById("btn7kaih").addEventListener("click", () => {
+      window.open("jurnal.html","_blank");
+    });
+  </script>
+</body>
+</html>
+

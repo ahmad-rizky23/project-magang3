@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Hitung Cepat</title>
+  <style>
+      * {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #1a1a40, #000);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* ===== BACKGROUND ===== */
+.background {
+  position: fixed;
+  inset: 0;
+  background-image: url("mtk.jpeg"); /* GANTI BACKGROUND DI SINI */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -2;
+}
+
+/* OPSIONAL: overlay gelap */
+.background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+}
+
+.game-box {
+  background: rgba(0,0,0,0.7);
+  padding: 25px;
+  border-radius: 15px;
+  width: 330px;
+  text-align: center;
+  box-shadow: 0 0 20px cyan;
+}
+
+h1 {
+  margin-bottom: 15px;
+}
+
+select, input, button {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+}
+
+button {
+  background: cyan;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #00bcd4;
+}
+
+input {
+  text-align: center;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.question {
+  font-size: 22px;
+  margin: 15px 0;
+}
+
+.hidden {
+  display: none;
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="game-box">
+    <h1>Game Hitung</h1>
+
+    <!-- MENU -->
+    <div id="menu">
+      <select id="level">
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+      <button onclick="startGame()">Mulai Game</button>
+    </div>
+
+ <!-- BACKGROUND -->
+  <div class="background"></div>
+
+      
+    <!-- GAME -->
+    <div id="game" class="hidden">
+      <div class="info">
+        <span>Soal: <span id="soalKe">1</span>/30</span>
+        <span>Waktu: <span id="timer">10</span>s</span>
+      </div>
+
+      <div class="question" id="question"></div>
+
+      <input type="number" id="answer" placeholder="Jawaban">
+      <button onclick="checkAnswer()">Jawab</button>
+    </div>
+
+    <!-- HASIL -->
+    <div id="result" class="hidden">
+      <h2>Game Selesai</h2>
+      <p>Skor Kamu: <span id="score">0</span>/30</p>
+      <button onclick="location.reload()">Main Lagi</button>
+    </div>
+  </div>
+
+ <script>
+     let level, maxTime, timer, interval;
+let soal = 0;
+let score = 0;
+let correctAnswer = 0;
+
+function startGame() {
+  level = document.getElementById("level").value;
+
+  if (level === "easy") maxTime = 10;
+  if (level === "medium") maxTime = 9;
+  if (level === "hard") maxTime = 8;
+
+  soal = 0;
+  score = 0;
+
+  document.getElementById("menu").classList.add("hidden");
+  document.getElementById("game").classList.remove("hidden");
+
+  nextQuestion();
+}
+
+function nextQuestion() {
+  if (soal >= 30) {
+    endGame();
+    return;
+  }
+
+  soal++;
+  document.getElementById("soalKe").innerText = soal;
+  document.getElementById("answer").value = "";
+
+  generateQuestion();
+  startTimer();
+}
+
+function generateQuestion() {
+  let a, b, operator;
+
+  if (level === "easy") {
+    a = rand(1, 10);
+    b = rand(1, 10);
+    operator = "+";
+    correctAnswer = a + b;
+  }
+
+  if (level === "medium") {
+    a = rand(10, 50);
+    b = rand(1, 20);
+    operator = Math.random() > 0.5 ? "+" : "-";
+    correctAnswer = operator === "+" ? a + b : a - b;
+  }
+
+  if (level === "hard") {
+    a = rand(10, 100);
+    b = rand(2, 10);
+    operator = Math.random() > 0.5 ? "×" : "÷";
+
+    if (operator === "×") {
+      correctAnswer = a * b;
+    } else {
+      correctAnswer = a;
+      a = a * b;
+    }
+  }
+
+  document.getElementById("question").innerText = `${a} ${operator} ${b}`;
+}
+
+function startTimer() {
+  clearInterval(interval);
+  timer = maxTime;
+  document.getElementById("timer").innerText = timer;
+
+  interval = setInterval(() => {
+    timer--;
+    document.getElementById("timer").innerText = timer;
+
+    if (timer <= 0) {
+      clearInterval(interval);
+      nextQuestion();
+    }
+  }, 1000);
+}
+
+function checkAnswer() {
+  clearInterval(interval);
+  const userAnswer = Number(document.getElementById("answer").value);
+
+  if (userAnswer === correctAnswer) {
+    score++;
+  }
+
+  nextQuestion();
+}
+
+function endGame() {
+  document.getElementById("game").classList.add("hidden");
+  document.getElementById("result").classList.remove("hidden");
+  document.getElementById("score").innerText = score;
+}
+
+function rand(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+ </script>
+</body>
+</html>

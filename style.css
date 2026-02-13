@@ -1,0 +1,298 @@
+/* === BODY & BACKGROUND === */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
+  background: linear-gradient(to bottom, #ff914d, #ffd580);
+}
+
+.background {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: url('sunset.png') no-repeat center center;
+  background-size: cover;
+  filter: brightness(0.75);
+}
+
+/* === MUSIC BUTTON DI POJOK KANAN ATAS === */
+.music-topright {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+}
+
+.spotify-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FF8C42, #FF4500, #D2691E);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(255,140,66,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.spotify-btn:hover {
+  transform: scale(1.15);
+  box-shadow: 0 8px 20px rgba(255,140,66,0.9);
+}
+
+.spotify-btn span {
+  color: #FFF8DC;
+  font-size: 22px;
+  margin-left: 2px;
+}
+
+/* === DAUN GUGUR === */
+.leaf {
+  position: fixed;
+  top: -10%;
+  font-size: 20px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* === PROFILE === */
+.profile-container {
+  margin-top: 100px;
+}
+
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 20px rgba(255,255,255,0.6);
+  transition: transform 0.3s;
+}
+
+.profile-img:hover {
+  transform: scale(1.05);
+}
+
+/* === BIODATA === */
+.bio {
+  max-width: 600px;
+  margin: 30px auto;
+  text-align: center;
+  padding: 20px 25px;
+  border-radius: 12px;
+}
+
+.bio h2 {
+  color: #FFD580;
+  margin-bottom: 10px;
+  font-size: 1.5em;
+}
+
+.bio p {
+  color: #FFE5B4;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  font-size: 1.1em;
+}
+
+/* === CARDS COLLAPSIBLE === */
+.cards-container {
+  max-width: 650px;
+  margin: 20px auto;
+  text-align: left;
+}
+
+.card {
+  background: rgba(0,0,0,0.5);
+  border-radius: 12px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  cursor: pointer;
+}
+
+.card-header h3 {
+  margin: 0;
+  color: #FFD580;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.card-toggle {
+  font-size: 20px;
+  color: #FFE5B4;
+  transition: transform 0.3s;
+}
+
+.card-body {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 20px;
+  color: #FFE5B4;
+  line-height: 1.5;
+  transition: max-height 0.5s ease, padding 0.5s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+/* === BUTTON 7 KAIH (UPGRADE) === */
+.btn-7kaih {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  margin: 22px auto;
+  padding: 16px 42px;
+
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+
+  color: #fff;
+  background: linear-gradient(
+    135deg,
+    #ff7a18,
+    #ffb347,
+    #ffd580
+  );
+
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 20px rgba(255, 122, 24, 0.45),
+    inset 0 0 0 rgba(255,255,255,0);
+
+  transition: 
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+/* Hover */
+.btn-7kaih:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow:
+    0 12px 28px rgba(255, 122, 24, 0.6),
+    inset 0 0 12px rgba(255,255,255,0.3);
+}
+
+/* Klik */
+.btn-7kaih:active {
+  transform: scale(0.97);
+}
+
+/* Icon kiri */
+.btn-7kaih .icon {
+  font-size: 22px;
+}
+
+/* Panah kanan animasi */
+.btn-7kaih .arrow {
+  font-size: 20px;
+  transition: transform 0.3s ease;
+}
+
+.btn-7kaih:hover .arrow {
+  transform: translateX(6px);
+}
+
+/* RESPONSIVE HP */
+@media (max-width: 600px) {
+  .btn-7kaih {
+    font-size: 16px;
+    padding: 14px 32px;
+  }
+}
+/* ===== SOSIAL MEDIA BUTTON BESAR TANPA BACKGROUND ===== */
+.social {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* jarak antar tombol */
+  margin-top: 25px;
+}
+
+.social button {
+  width: 60px;       /* ukuran tombol lebih besar */
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: transparent; /* hapus background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: none;
+  transition: transform 0.25s ease;
+}
+
+.social button:hover {
+  transform: scale(1.15); /* efek hover membesar */
+}
+
+/* IKON DI DALAM BUTTON */
+.social button img {
+  width: 46px;    /* ikon diperbesar */
+  height: 46px;
+  object-fit: cover;
+  border-radius: 50%; /* tetap bulat */
+}
+
+#goldGameBtn {
+  position: relative;
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+  background: linear-gradient(45deg, #FFD700, #FFA500);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+/* Glow shimmer */
+#goldGameBtn::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.3), rgba(255,255,255,0.0), rgba(255,255,255,0.3));
+  transform: rotate(25deg);
+  animation: shine 2s infinite;
+}
+
+@keyframes shine {
+  0% { left: -75%; }
+  50% { left: 100%; }
+  100% { left: 100%; }
+}
+
+#goldGameBtn:hover {
+  background: linear-gradient(45deg, #FFC700, #FFB500);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.8);
+  transform: translateY(-2px);
+}

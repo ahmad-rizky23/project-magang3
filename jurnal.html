@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jurnal 7 KAIH</title>
+
+<style>
+/* ===== GLOBAL ===== */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: url("anak.png") no-repeat center top fixed;
+  background-size: cover;
+  color: #1f2937;
+  text-align: center;
+}
+
+/* Overlay ringan agar teks terbaca tapi background tetap terlihat */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.65);
+  z-index: -1;
+}
+
+/* ===== HEADER ===== */
+header { padding: 25px 15px; }
+
+header h1 {
+  margin: 0;
+  font-size: 2.2em;
+  color: #d62828; 
+  font-weight: 800;
+}
+
+header p {
+  margin-top: 8px;
+  font-size: 1.1em;
+  color: #1d3557;
+}
+
+/* ===== UPLOAD SECTION ===== */
+.upload-section {
+  max-width: 600px;
+  margin: 25px auto;
+  padding: 10px;
+  text-align: left;
+}
+
+.upload-section h2 {
+  text-align: center;
+  color: #2a9d8f;
+  margin-bottom: 15px;
+  font-size: 1.6em;
+}
+
+/* LABEL JUDUL */
+.judul-label {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #1d3557;
+  text-shadow: 1px 1px 2px white;
+}
+
+/* DROPDOWN JUDUL */
+#judulSelect {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid #a8dadc;
+  font-size: 1em;
+  background: white; /* Warna latar putih */
+  color: black;      /* Teks hitam */
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+/* Saat hover */
+#judulSelect:hover {
+  background: #f0f0f0; /* sedikit abu muda saat hover */
+}
+
+/* WARNA PILIHAN DI DROPDOWN */
+#judulSelect option {
+  background: white; /* Latar opsi putih */
+  color: black;      /* Teks hitam */
+}
+
+
+/* INPUT & TEXTAREA */
+.upload-section textarea {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 2px solid #a8dadc;
+  font-size: 1em;
+  background: rgba(255,255,255,0.9);
+}
+
+.upload-section textarea:focus {
+  outline: none;
+  border-color: #2a9d8f;
+}
+
+/* BUTTON UPLOAD */
+.upload-section button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(135deg,#e63946,#f77f00);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.upload-section button:hover { transform: scale(1.05); }
+
+/* ===== ACTION BUTTONS ===== */
+.action-buttons {
+  margin: 25px 0;
+}
+
+.action-buttons button {
+  padding: 12px 22px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(135deg,#457b9d,#1d3557);
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.action-buttons button:hover { opacity: 0.9; }
+
+/* ===== LIST JURNAL ===== */
+#listJurnal {
+  max-width: 750px;
+  margin: 20px auto;
+  padding: 0 10px;
+}
+
+/* ITEM JURNAL */
+.jurnal { margin-bottom: 30px; text-align: left; }
+
+.jurnal h3 { color: #e63946; margin-bottom: 6px; }
+.jurnal p { color: #1d3557; line-height: 1.6; }
+.jurnal img,
+.jurnal video { width: 100%; margin-top: 10px; border-radius: 12px; }
+
+/* ===== FOOTER ===== */
+footer { margin: 40px 0 20px; color: #1d3557; font-weight: bold; }
+
+/* ===== FILE UPLOAD CUSTOM ===== */
+.file-box { display: block; margin-bottom: 15px; cursor: pointer; }
+.file-box input { display: none; }
+.file-ui {
+  border: 3px dashed #e63946;
+  border-radius: 18px;
+  padding: 25px;
+  text-align: center;
+  background: rgba(255,255,255,0.85);
+  transition: all 0.3s ease;
+}
+.file-ui:hover { background: rgba(255,255,255,1); transform: scale(1.02); }
+.file-icon { font-size: 40px; display: block; margin-bottom: 8px; }
+.file-text { font-size: 1.1em; font-weight: bold; color: #d62828; margin: 5px 0; }
+.file-hint { color: #1d3557; font-size: 0.9em; }
+
+/* ===== PREVIEW ===== */
+#previewArea { margin-top: 15px; text-align: center; }
+.preview-box { margin-top: 10px; }
+.preview-box img,
+.preview-box video { max-width: 100%; border-radius: 15px; margin-top: 10px; box-shadow: 0 6px 15px rgba(0,0,0,0.25); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <h1>7 Kebiasaan Anak Indonesia Hebat</h1>
+  <p>Jurnal Kreatif Anak SMP Indonesia 🇮🇩</p>
+</header>
+
+<!-- UPLOAD SECTION -->
+<section class="upload-section">
+  <h2>✍️ Unggah Bukti Kebiasaan Hebatmu</h2>
+
+  <!-- Dropdown Judul -->
+  <label for="judulSelect" class="judul-label">Pilih Judul Kegiatan:</label>
+  <select id="judulSelect">
+    <option value="">-- Pilih Judul --</option>
+    <option value="Bangun Pagi">1. Bangun Pagi</option>
+    <option value="Beribadah">2. Beribadah</option>
+    <option value="Berolahraga">3. Berolahraga</option>
+    <option value="Makan Sehat & Bergizi">4. Makan Sehat & Bergizi</option>
+    <option value="Gemar Belajar">5. Gemar Belajar</option>
+    <option value="Bermasyarakat">6. Bermasyarakat</option>
+    <option value="Tidur Cepat">7. Tidur Cepat</option>
+  </select>
+
+  <!-- Deskripsi -->
+  <textarea id="deskripsi" rows="4" placeholder="Ceritakan kegiatan atau kebiasaan baik yang kamu lakukan hari ini..."></textarea>
+
+  <!-- FILE UPLOAD -->
+  <label class="file-box">
+    <input type="file" id="media" accept="image/*,video/*">
+    <div class="file-ui">
+      <span class="file-icon">📸 🎥</span>
+      <p class="file-text">Pilih Foto atau Video</p>
+      <small class="file-hint">JPG • PNG • MP4</small>
+    </div>
+  </label>
+
+  <!-- PREVIEW -->
+  <div id="previewArea"></div>
+
+  <!-- BUTTON UPLOAD -->
+  <button id="uploadBtn">Unggah Dokumentasimu</button>
+</section>
+
+<!-- ACTION BUTTON -->
+<div class="action-buttons">
+  <button id="printBtn">🖨 Print</button>
+  <button id="pdfBtn">📄 Simpan PDF</button>
+</div>
+
+<!-- LIST JURNAL -->
+<section id="listJurnal"></section>
+
+<!-- FOOTER -->
+<footer>
+  © 2026 • Jurnal 7 KAIH • Anak SMP Indonesia
+</footer>
+
+<script>
+const uploadBtn = document.getElementById("uploadBtn");
+const listJurnal = document.getElementById("listJurnal");
+
+uploadBtn.addEventListener("click", () => {
+  const judul = judulInput();
+  const deskripsi = deskripsiInput();
+  const media = document.getElementById("media").files[0];
+
+  if (!judul || !deskripsi || !media) {
+    alert("Lengkapi judul, deskripsi, dan media!");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    const jurnal = JSON.parse(localStorage.getItem("jurnalKAIH")) || [];
+    jurnal.unshift({
+      judul,
+      deskripsi,
+      file: reader.result,
+      type: media.type
+    });
+    localStorage.setItem("jurnalKAIH", JSON.stringify(jurnal));
+    tampilkanJurnal();
+    resetForm();
+  };
+  reader.readAsDataURL(media);
+});
+
+function tampilkanJurnal() {
+  listJurnal.innerHTML = "";
+  const jurnal = JSON.parse(localStorage.getItem("jurnalKAIH")) || [];
+
+  jurnal.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "jurnal";
+
+    div.innerHTML = `
+      <h3>${item.judul}</h3>
+      <p>${item.deskripsi}</p>
+    `;
+
+    if (item.type.includes("image")) {
+      div.innerHTML += `<img src="${item.file}">`;
+    } else {
+      div.innerHTML += `<video controls src="${item.file}"></video>`;
+    }
+
+    listJurnal.appendChild(div);
+  });
+}
+
+function resetForm() {
+  document.getElementById("judulSelect").value = "";
+  document.getElementById("deskripsi").value = "";
+  document.getElementById("media").value = "";
+}
+
+function judulInput() {
+  return document.getElementById("judulSelect").value.trim();
+}
+
+function deskripsiInput() {
+  return document.getElementById("deskripsi").value.trim();
+}
+
+window.onload = tampilkanJurnal;
+
+/* PRINT */
+document.getElementById("printBtn").onclick = () => window.print();
+
+/* PDF */
+document.getElementById("pdfBtn").onclick = () => {
+  const jurnal = JSON.parse(localStorage.getItem("jurnalKAIH")) || [];
+  if (jurnal.length === 0) { alert("Belum ada jurnal"); return; }
+
+  let isi = "JURNAL 7 KEBIASAAN ANAK INDONESIA HEBAT\n\n";
+  jurnal.forEach((j, i) => {
+    isi += `${i+1}. ${j.judul}\n${j.deskripsi}\n\n`;
+  });
+
+  const blob = new Blob([isi], { type: "application/pdf" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "Jurnal_7KAIH.pdf";
+  a.click();
+};
+
+/* PREVIEW MEDIA */
+const mediaInput = document.getElementById("media");
+const previewArea = document.getElementById("previewArea");
+
+mediaInput.addEventListener("change", () => {
+  previewArea.innerHTML = "";
+  const file = mediaInput.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    const div = document.createElement("div");
+    div.className = "preview-box";
+
+    if (file.type.includes("image")) {
+      div.innerHTML = `<p>Preview Foto:</p><img src="${reader.result}">`;
+    } else if (file.type.includes("video")) {
+      div.innerHTML = `<p>Preview Video:</p><video src="${reader.result}" controls></video>`;
+    }
+
+    previewArea.appendChild(div);
+  };
+  reader.readAsDataURL(file);
+});
+</script>
+</body>
+</html>
